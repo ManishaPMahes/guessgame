@@ -72,6 +72,6 @@ p{
 h1{
     padding: 100px;
 }
-errorMessage{
+#errorMessage{
     color:red;
 }
