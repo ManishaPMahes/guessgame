@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuesstheNumber</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <center>
+    <h1>Guess the Number from 1 to 10</h1>
+    <input id="guess">
+    <button onclick="check()">Check</button>
+    <p id="show">Status:</p>
+    <p id="marks">Your Score Now:10</p>
+    </center>
+</body>
+<script>
+    var guess=document.getElementById("guess")
+    var show=document.getElementById("show")
+    var marks=document.getElementById("marks")
+    var random=Math.floor(Math.random()*10+1)
+    var totalmarks=10
+    function check()
+    {
+        var entered=guess.value
+        if(entered==random)
+    {
+        console.log("You Got It")
+        show.textContent="Status: " + "You Got It"
+        alert("🎉 Congratulations! You guessed the right number! 🎉");
+
+    }
+    else{
+        console.log("Oops! Try Again")
+        show.textContent="Status: "+ "Oops! Try Again"
+        totalmarks=totalmarks-1
+        marks.textContent="Your Score Now : "+totalmarks
+    }
+    }
+    </script>
+</html>
