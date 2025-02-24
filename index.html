@@ -9,9 +9,10 @@
 <body>
     <center>
     <h1>Guess the Number from 1 to 10</h1>
-    <input id="guess">
+    <input type="text" id="guess" placeholder="Enter a number">
+    <p id="errorMessage"></p>
     <button onclick="check()">Check</button>
-    <p id="show">Status:</p>
+    <p id="show"></p>
     <p id="marks">Your Score Now:10</p>
     <p id="randomNum"></p>
     </center>
@@ -21,29 +22,52 @@
     var show=document.getElementById("show")
     var marks=document.getElementById("marks")
     var randomNum=document.getElementById("randomNum")
-    var checkButton = document.querySelector("button")
+    var checkButton = document.querySelector("button"); 
     var random=Math.floor(Math.random()*10+1)
     var totalmarks=10
     function check()
     {
-        var entered=guess.value
+        var entered=guess.value.trim()
+        errorMessage.textContent = ""; 
+
+    
+    if (entered === "" || !/^\d+$/.test(entered)) {
+        errorMessage.textContent = "⚠️ Enter only numbers (1-10)";
+        guess.value = ""; 
+        return;
+    }
+
+    entered = parseInt(entered); // Convert to number after validation
+
+    
+    if (entered < 1 || entered > 10) {
+        errorMessage.textContent = "⚠️ Enter only numbers between 1 and 10";
+        guess.value = ""; 
+        return;
+    }
+
+
+    
         if(entered==random)
     {
         console.log("You Got It")
-        show.textContent="Status: " + "You Got It"
+        show.textContent="You Got It"
         alert("🎉 Congratulations! You guessed the right number! 🎉");
-
+        guess.disabled=true
+        checkButton.remove()
     }
     else{
         console.log("Oops! Try Again")
-        show.textContent="Status: "+ "Oops! Try Again"
+        show.textContent="Oops! Try Again"
         totalmarks=totalmarks-1
         marks.textContent="Your Score Now : "+totalmarks
+        guess.value=""
+       
     }
-        if (totalmarks === 0) {
+    if (totalmarks === 0) {
             randomNum.textContent="The Number was: " +random
             alert("❌ Game Over! No more attempts left.");
-            checkButton.disabled = true;
+            checkButton.remove()
         }
     }
     </script>
